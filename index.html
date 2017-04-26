@@ -225,7 +225,9 @@
 <script>
   $(function() {
     $.deck('.slide', {
-        swipeDirection: 'vertical'
+        touch: {
+            swipeDirection: 'vertical'
+        }
     });
     $('.slide').click(function(e) {
       $.deck('next');
