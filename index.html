@@ -225,11 +225,13 @@
 <script>
   $(function() {
     $.deck('.slide', {
-        swipeDirection: 'both'
+        swipeDirection: 'vertical'
     });
     $('.slide').click(function(e) {
       $.deck('next');
     });
+
+    console.log($.deck('getOptions'));
   });
 </script>
 
