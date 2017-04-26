@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Stats | The Miami Hurricane</title>
+
+  <!-- Required stylesheet -->
+  <link rel="stylesheet" media="screen" href="core/deck.core.css">
+
+  <!-- Extension CSS files go here. Remove or add as needed. -->
+  <link rel="stylesheet" media="screen" href="extensions/goto/deck.goto.css">
+  <link rel="stylesheet" media="screen" href="extensions/menu/deck.menu.css">
+  <link rel="stylesheet" media="screen" href="extensions/navigation/deck.navigation.css">
+  <link rel="stylesheet" media="screen" href="extensions/status/deck.status.css">
+  <link rel="stylesheet" media="screen" href="extensions/scale/deck.scale.css">
+
+  <!-- Style theme. More available in /themes/style/ or create your own. -->
+  <!--link rel="stylesheet" media="screen" href="themes/style/web-2.0.css"-->
+  <link rel="stylesheet" media="screen" href="themes/style/custom.css">
+
+  <!-- Transition theme. More available in /themes/transition/ or create your own. -->
+  <link rel="stylesheet" media="screen" href="themes/transition/vertical-slide.css">
+
+  <!-- Basic black and white print styles -->
+  <link rel="stylesheet" media="print" href="core/print.css">
+
+  <!-- Required Modernizr file -->
+  <script src="modernizr.custom.js"></script>
+</head>
+<body>
+
+  <div class="header">
+    <h1><a target="_blank" href="http://www.themiamihurricane.com/">The Miami Hurricane</a></h1>
+  </div>
+
+  <div class="deck-container">
+
+    <!-- Begin slides. Just make elements with a class of slide. -->
+
+    <section class="slide intro-slide">
+      <div class="slide-content-text">
+        <h1 class="slide-headline">Intro Slide Headline</h1>
+        <p class="slide-text">Intro Slide Text</p>
+        <p class="slide-byline">Byline Text</p>
+        <p class="slide-user-tip"><span class="slide-user-tip-text"></span></p>
+      </div> <!-- End slide-content-text -->
+    </section>
+
+    <section class="slide" v-for="(stat, index) in stats">
+      <div class="slide-content-text">
+        <!--h1 class="slide-headline">Slide</h1-->
+        <p class="slide-text">{{stat["STAT"]}}</p>
+        <p class="slide-source">Source: {{stat["SOURCE"]}}</p>
+        <a target="_blank" v-bind:href="stat['LINK']"><p class="slide-story">Story: {{stat["STORY"]}}, {{stat["PUBLICATION DATE"]}}</p></a>
+      </div> <!-- End slide-content-text -->
+
+      <div class="slide-content-data" v-bind:id="index">
+        
+      </div> <!-- End slide-content-data -->
+      
+    </section> <!-- End slide -->
+
+    <!-- End slides. -->
+
+    <!-- Begin extension snippets. Add or remove as needed. -->
+
+    <!-- deck.navigation snippet -->
+    <!--div aria-role="navigation">
+      <a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
+      <a href="#" class="deck-next-link" title="Next">&#8594;</a>
+    </div-->
+
+    <!-- deck.status snippet -->
+    <p class="deck-status" aria-role="status">
+      <span class="deck-status-current"></span>
+      /
+      <span class="deck-status-total"></span>
+    </p>
+
+    <!-- deck.goto snippet -->
+    <!--form action="." method="get" class="goto-form">
+      <label for="goto-slide">Go to slide:</label>
+      <input type="text" name="slidenum" id="goto-slide" list="goto-datalist">
+      <datalist id="goto-datalist"></datalist>
+      <input type="submit" value="Go">
+    </form-->
+
+    <!-- End extension snippets. -->
+  </div>
+
+<!-- Required JS files. -->
+<script src="jquery.min.js"></script>
+<script src="core/deck.core.js"></script>
+
+<!-- Extension JS files. Add or remove as needed. -->
+<script src="extensions/menu/deck.menu.js"></script>
+<!--script src="extensions/goto/deck.goto.js"></script-->
+<script src="extensions/status/deck.status.js"></script>
+<!--script src="extensions/navigation/deck.navigation.js"></script-->
+<script src="extensions/scale/deck.scale.js"></script>
+
+<!-- Initialize the deck. You can put this in an external file if desired. -->
+<script src="vue.min.js"></script>
+<script src="Chart.min.js"></script>
+<script src="highcharts.js"></script>
+<script src="exporting.js"></script>
+<script>
+  const stats = [
+  {
+    "STAT": "After committing to enrolling and matriculating the highest percentage of black students among peer institutions, the university met its goal: 10 percent of the freshman class were black students.",
+    "SOURCE": "University of Miami",
+    "STORY": "Frenk sets stage for second year, pivots toward action",
+    "PUBLICATION DATE": "8/25/2016",
+    "LINK": "http://www.themiamihurricane.com/2016/08/25/president-frenks-first-year-and-8-initiatives/"
+  },
+  {
+    "STAT": "For the 2016-2017 school year, 7,073 students applied for financial aid, and 95 percent of those students received aid.",
+    "SOURCE": "Financial Aid Office",
+    "STORY": "Financial Aid Office gives students a run for their money",
+    "PUBLICATION DATE": "9/21/2016",
+    "LINK": "http://www.themiamihurricane.com/2016/09/21/financial-aid-office-gives-students-a-run-for-their-money/"
+  },
+  {
+    "STAT": "Sixty-eight percent of the freshman class speaks more than one language.",
+    "SOURCE": "Class of 2020 Student Profile",
+    "STORY": "Relocated admissions office welcomes prospective students",
+    "PUBLICATION DATE": "10/16/2016",
+    "LINK": "http://www.themiamihurricane.com/2016/10/16/relocated-admissions-office-welcomes-prospective-students/"
+  },
+  {
+    "STAT": "More than 500 University of Miami faculty and staff signed a letter to the community, taking a stand against intolerance and re-emphasizing the importance of critical thinking and inquiry.",
+    "SOURCE": "Letter from Faculty and Staff",
+    "STORY": "Post-election letter drafted by faculty accumulates 502 signatures",
+    "PUBLICATION DATE": "11/30/2016",
+    "LINK": "http://www.themiamihurricane.com/2016/11/30/post-election-letter-drafted-by-faculty-accumulates-502-signatures/"
+  },
+  {
+    "STAT": "That fourth quarter tradition, where the Canes roar to life to seal a game or make a dramatic comeback, just didn’t happen this season. Even when Miami did score, the fourth quarter was the team’s lowest scoring quarter on average.",
+    "SOURCE": "Hurricanesports.com",
+    "STORY": "Breaking down the Hurricanes season by the numbers",
+    "PUBLICATION DATE": "12/28/2016",
+    "LINK": "http://www.themiamihurricane.com/2016/12/28/breaking-down-the-hurricanes-season-by-the-numbers/"
+  },
+  {
+    "STAT": "Miami-Dade County is home to 46 percent of the U.S. Cuban-American population.",
+    "SOURCE": "Pew Research Center analysis of the Census Bureau’s American Community Survey",
+    "STORY": "Wet foot, dry foot policy change elicits mixed reactions",
+    "PUBLICATION DATE": "1/18/2017",
+    "LINK": "http://www.themiamihurricane.com/2017/01/18/wet-foot-dry-foot/"
+  },
+  {
+    "STAT": "As of fall 2016, 26 percent of UM’s undergraduate student population identified as Hispanic or Latino — many of them of Cuban descent.",
+    "SOURCE": "UM Factbook 2016-2017",
+    "STORY": "Wet foot, dry foot policy change elicits mixed reactions",
+    "PUBLICATION DATE": "1/18/2017",
+    "LINK": "http://www.themiamihurricane.com/2017/01/18/wet-foot-dry-foot/"
+  },
+  {
+    "STAT": "Fifteen percent of the university’s student body is made up of international students, including 338 students from the Middle East.",
+    "SOURCE": "UM 2016-2017 Factbook",
+    "STORY": "Trump’s crackdown on immigration creates uncertainty",
+    "PUBLICATION DATE": "1/25/2017",
+    "LINK": "http://www.themiamihurricane.com/2017/01/25/trumps-crackdown-on-immigration-creates-uncertainty/"
+  },
+  {
+    "STAT": "Muslim students made up 4 percent of the university’s student body in fall 2016.",
+    "SOURCE": "UM 2016-2017 Factbook",
+    "STORY": "Trump’s crackdown on immigration creates uncertainty",
+    "PUBLICATION DATE": "1/25/2017",
+    "LINK": "http://www.themiamihurricane.com/2017/01/25/trumps-crackdown-on-immigration-creates-uncertainty/"
+  },
+  {
+    "STAT": "An estimated 15 percent of the university’s population is Jewish.",
+    "SOURCE": "UM Factbook 2016-2017",
+    "STORY": "Hillel celebrates 75 years of shaping Jewish student life",
+    "PUBLICATION DATE": "1/25/2017",
+    "LINK": "http://www.themiamihurricane.com/2017/01/25/hillel-celebrates-75-years-of-shaping-jewish-student-life/"
+  },
+  {
+    "STAT": "Thirteen percent of UM students come from the top 1 percent of wealthiest households.",
+    "SOURCE": "The Equality of Opportunity Project",
+    "STORY": "‘Sugar Babies’ seek way to keep up with Miami standard",
+    "PUBLICATION DATE": "2/8/2017",
+    "LINK": "http://www.themiamihurricane.com/2017/02/08/sugar-babies-seek-way-to-keep-up-with-miami-standard/"
+  },
+  {
+    "STAT": "First-generation students, individuals who are the first in their family to seek a degree at a four-year institution, make up approximately 50 percent of the total college population.",
+    "SOURCE": "U.S. Department of Education",
+    "STORY": "Seniors reflect on challenges faced as first-generation students, pave way for others",
+    "PUBLICATION DATE": "2/22/2017",
+    "LINK": "http://www.themiamihurricane.com/2017/02/22/seniors-reflect-on-challenges-faced-as-first-generation-students-pave-way-for-others/"
+  },
+  {
+    "STAT": "The number of undergraduate English majors dropped from 294 to 214 between 2002 and 2012, a decrease of approximately 27 percent over 10 years. By fall 2016, this number had dwindled to 118.",
+    "SOURCE": "UM Fact Book",
+    "STORY": "As English major shrinks, department rethinks outreach",
+    "PUBLICATION DATE": "3/8/2017",
+    "LINK": "http://www.themiamihurricane.com/2017/03/08/decline-of-english-majors/"
+  },
+  {
+    "STAT": "Ninety-four percent of Miami Athletic Training students pass the certification exam on their first try – 12 percent higher than the national average.",
+    "SOURCE": "Talk to Isaiah for source",
+    "STORY": "Rigorous training program provides opportunity for variety of careers",
+    "PUBLICATION DATE": "3/29/2017",
+    "LINK": "http://www.themiamihurricane.com/2017/03/29/rigorous-training-program-provides-opportunity-for-variety-of-careers/"
+  },
+  {
+    "STAT": "The percent of American adults identifying as lesbian, gay, bisexual or transgender increased from 3.5 percent in 2012 to 4.1 percent in 2016. An estimated 10 million adults identify as LGBT in the United States. However, those numbers exclude other sexual orientations falling under the “Q+” portion of the acronym, including pansexuality.",
+    "SOURCE": "Gallup poll conducted in January 2017",
+    "STORY": "Pride Week draws attention to underrepresented identities",
+    "PUBLICATION DATE": "4/5/2017",
+    "LINK": "http://www.themiamihurricane.com/2017/04/05/paw/"
+  }
+];
+</script>
+<script>
+  var app = new Vue({
+    el: '.deck-container',
+    data: {stats:stats}
+  });
+</script>
+<script>
+  $(function() {
+    $.deck('.slide');
+    $('.slide').click(function(e) {
+      $.deck('next');
+    });
+  });
+</script>
+
+<!-- Charts -->
+<script>
+  const chart0Container = $('#0');
+  const chart1Container = $('#1');
+  const chart2Container = $('#2');
+  const chart3Container = $('#3');
+  const chart4Container = $('#4');
+  const chart5Container = $('#5');
+  const chart6Container = $('#6');
+  const chart7Container = $('#7');
+  const chart8Container = $('#8');
+  const chart9Container = $('#9');
+  const chart10Container = $('#10');
+  const chart11container = $('#11');
+  const chart12Container = $('#12');
+  const chart13Container = $('#13');
+  //console.log(chart0Container);
+
+  function buildBlocks(container, number, size) {
+    let mySize = "box-" + size;
+    for (let i = 0; i < number; i++) {container.append("<div class='box " + mySize + "'></div>");}
+  }
+
+  function buildChart(container, data) {
+    Highcharts.chart(container.attr('id'), data);
+  }
+
+  const chart4data = {
+      chart: {
+          type: 'column'
+      },
+      title: {
+          text: 'Average Points per Quarter'
+      },
+      xAxis: {
+          categories: [
+              'Q1',
+              'Q2',
+              'Q3',
+              'Q4'
+          ],
+          crosshair: true
+      },
+      yAxis: {
+          min: 0,
+          title: {
+              text: 'Points'
+          }
+      },
+      tooltip: {
+          headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+          pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+              '<td style="padding:0"><b>{point.y:.1f} points</b></td></tr>',
+          footerFormat: '</table>',
+          shared: true,
+          useHTML: true
+      },
+      plotOptions: {
+          column: {
+              pointPadding: 0.2,
+              borderWidth: 0
+          }
+      },
+      series: [{
+          name: 'Quarters',
+          data: [7.1, 8.7, 12.1, 6.8]
+
+      }]
+    };
+
+    const chart5data = {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        title: {
+            text: 'Proportion of Cuban-Americans in Miami-Dade'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                //cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true
+            }
+        },
+        series: [{
+            name: 'Proportion of Cuban-Americans',
+            colorByPoint: true,
+            data: [{
+                name: 'Cuban-Americans in Miami-Dade',
+                y: 46
+            }, {
+                name: 'Cuban-Americans in remainder of U.S.',
+                y: 54,
+                sliced: true,
+                //selected: true
+            }]
+        }]
+  };
+
+    const chart6data = {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        title: {
+            text: 'Racial breakdown of UM'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                //cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true
+            }
+        },
+        series: [{
+            name: 'Races',
+            colorByPoint: true,
+            data: [{
+                name: 'White',
+                y: 48
+            }, {
+                name: 'Hispanic or Latino',
+                y: 28,
+                sliced: true,
+                //selected: true
+            }, {
+                name: 'Black',
+                y: 9
+            }, {
+                name: 'Asian/Pacific Islander',
+                y: 12
+            }, {
+                name: 'American Indian',
+                y: 0
+            }, {
+                name: '2 or More Races',
+                y: 0.2
+            }]
+        }]
+  };
+
+  const chart9data = {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        title: {
+            text: 'Known religious breakdown of UM'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                //cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true
+            }
+        },
+        series: [{
+            name: 'Religion',
+            colorByPoint: true,
+            data: [{
+                name: 'Catholic',
+                y: 39
+            }, {
+                name: 'Hindu',
+                y: 4
+                //selected: true
+            }, {
+                name: 'Jewish',
+                y: 15,
+                sliced: true
+            }, {
+                name: 'Muslim',
+                y: 4
+            }, {
+                name: 'Protestant',
+                y: 29
+            }, {
+                name: 'Other',
+                y: 10
+            }]
+        }]
+  };
+
+  const chart12data = {
+    chart: {
+        type: 'line'
+    },
+    title: {
+        text: 'Number of English Majors'
+    },
+    subtitle: {
+        text: 'Source: UM Fact Book 2016-2017'
+    },
+    xAxis: {
+        categories: [2012, 2013, 2014, 2015, 2016]
+    },
+    yAxis: {
+        title: {
+            text: 'Number of students'
+        }
+    },
+    plotOptions: {
+        line: {
+            dataLabels: {
+                enabled: true
+            },
+            enableMouseTracking: false
+        }
+    },
+    series: [{
+        name: 'English majors',
+        data: [214,193,167,120,118]
+    }]
+  };
+
+  chart13data = {
+      chart: {
+          type: 'column'
+      },
+      title: {
+          text: 'First-try certification exam pass percentage'
+      },
+      xAxis: {
+          categories: [
+              'University of Miami',
+              'National Average'
+          ],
+          crosshair: true
+      },
+      yAxis: {
+          min: 0,
+          title: {
+              text: 'Percentage'
+          }
+      },
+      tooltip: {
+          headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+          pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+              '<td style="padding:0"><b>{point.y:.1f} %</b></td></tr>',
+          footerFormat: '</table>',
+          shared: true,
+          useHTML: true
+      },
+      plotOptions: {
+          column: {
+              pointPadding: 0.2,
+              borderWidth: 0
+          }
+      },
+      series: [{
+          name: 'Institutions',
+          data: [94, 82]
+
+      }]
+    };
+
+  buildBlocks(chart0Container, 10, "lg");
+  //buildBlocks(chart1Container, 7073, "sm");
+  buildBlocks(chart2Container, 100, "md");
+  buildBlocks(chart3Container, 502, "sm");
+  buildChart(chart4Container, chart4data);
+  buildChart(chart5Container, chart5data);
+  buildChart(chart6Container, chart6data);
+  buildBlocks(chart7Container, 100, "md");
+
+  buildChart(chart9Container, chart9data);
+
+  buildChart(chart12Container, chart12data);
+  buildChart(chart13Container, chart13data);
+
+</script>
+<!-- End Charts -->
+
+</body>
+</html>

@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Roboto+Slab:400,700');
+
+body {
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Roboto Slab",Georgia,serif;
+    font-size: 16px;
+}
+
+p {
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+}
+
+a p {
+    text-decoration: underline;
+}
+
+a:link, a:visited, a:hover, a:active {
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+    /*font-family: "Open Sans", Arial, Helvetica, sans-serif;*/
+}
+
+.header {
+    width: 100%;
+    height: 25px;
+    position: fixed;
+    padding-left: 10px;
+    padding-right: 10px;
+    z-index: 100;
+}
+
+.deck-slide-scaler {
+    max-width: 1200px;
+    display: block;
+    margin: 0 auto;
+}
+
+.slide-content-text, .slide-content-data {
+    /*text-align: center;*/
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.slide-content-data {
+    margin-top: 10px;
+}
+
+.slide {
+    font-size: 1.5em;
+    padding: 15px;
+    padding-left: 5px;
+    padding-top: 30px;
+}
+
+.slide-source {
+    font-size: 16px;
+}
+
+.slide-text::first-letter {
+    font-size: 1.75em;
+    font-weight: bold;
+}
+
+.box {
+    width: 20px;
+    height: 20px;
+    background-color: #808080;
+    display: inline-block;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    vertical-align: middle;
+}
+
+.box-sm {
+    width: 5px;
+    height: 5px;
+}
+
+.box-med {
+    width: 20px;
+    height: 20px;
+}
+
+.box-lg {
+    width: 50px;
+    height: 50px;
+}
+
+.slide-headline {
+    font-size: 1.7em;
+}
+
+.slide-byline {
+    font-size: 0.8em;
+}
+
+#slide-1 .box:first-child {
+    background-color: black;
+}
+
+#slide-3 .box:nth-last-child(33) ~ .box {
+    background-color: black;
+}
+
+#slide-8 .box:nth-last-child(16) ~ .box {
+    background-color: black;
+}
+
+.slide-user-tip-text:before {
+    content: "Click or use the Down Arrow to continue. ↓";
+    font-weight: bold;
+}
+
+@media (max-width:415px) {
+    .slide {
+        font-size: 1.15em;
+    }
+
+    .slide-text::first-letter {
+        font-size: 1.5em;
+    }
+
+    .slide-user-tip-text:before {
+        content: "Tap or swipe up to continue. ↓";
+    }
+}
