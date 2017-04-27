@@ -100,11 +100,11 @@ a:link, a:visited, a:hover, a:active {
     font-size: 0.8em;
 }
 
-#slide-1 .box:first-child {
+#slide-1 .box:last-child {
     background-color: black;
 }
 
-#slide-3 .box:nth-last-child(33) ~ .box {
+#slide-3 .box:nth-last-child(69) ~ .box {
     background-color: black;
 }
 
